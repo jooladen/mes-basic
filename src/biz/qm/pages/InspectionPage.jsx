@@ -49,7 +49,6 @@ export default function InspectionPage() {
 
   const patch = (partial) => setCriteria((prev) => ({ ...prev, ...partial }))
   const handleReset = () => {
-    setCriteria(EMPTY_CRITERIA)
     search(EMPTY_CRITERIA)
   }
   const inspItemLabel = (value) => inspItemCodes.find((c) => c.value === value)?.label ?? value

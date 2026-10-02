@@ -1,6 +1,6 @@
 // Design Ref: §5.4 작업지시 (PP_WO_0010) — 상태 MultiCombo · 설비 TreeCombo · 키워드(지시번호·품목코드) + 목록 표
 // Plan FR-06 / FR-08: 페이지는 service 만 호출한다.
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Input } from '@/common/components/ui/input'
 import { MultiCombo } from '@/common/components/form/MultiCombo'
 import { SearchBar, SearchField } from '@/common/components/form/SearchBar'
@@ -38,12 +38,13 @@ export default function WorkOrderPage() {
     setCriteria(EMPTY_CRITERIA)
     search(EMPTY_CRITERIA)
   }
+  const handleSearch = useCallback(() => search(criteria), [search]) // 렌더마다 함수 재생성 방지
   const statusLabel = (value) => statusCodes.find((c) => c.value === value)?.label ?? value
   const columns = buildColumns({ statusLabel, pathOf })
 
   return (
     <div className="flex flex-col gap-4" data-testid="screen-PP_WO_0010">
-      <SearchBar onSearch={() => search(criteria)} onReset={handleReset} loading={loading}>
+      <SearchBar onSearch={handleSearch} onReset={handleReset} loading={loading}>
         <SearchField label="상태" htmlFor="statuses" className="flex min-w-64 flex-col gap-1">
           <MultiCombo id="statuses" options={statusCodes} value={criteria.statuses} onChange={(statuses) => patch({ statuses })} placeholder="전체" />
         </SearchField>
