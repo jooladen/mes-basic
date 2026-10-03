@@ -10,4 +10,4 @@ test-results
 # bkit 플러그인 런타임 로그 — 도구 호출마다 갱신됨. Tailwind 가 스캔하면 dev 화면이 계속 새로고침된다
 .bkit
 # 연습 문제 정답지·개인 답안 — 동료 배포용 저장소에 올라가면 연습이 무의미해진다
-_practice
+# _practice
